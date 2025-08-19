@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Circular - Vender</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+    <script src="static/js/app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Mercado Circular</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="market.html">Productos</a>
+            <a href="sell.html">Vender</a>
+            <a href="repair.html">Reparar</a>
+        </nav>
+    </header>
+    <h2 style="text-align:center; padding: 30px 0 10px 0;">Publica tu producto</h2>
+    <div class="form-container">
+        <form id="sellForm">
+            <label for="name">Nombre del artículo</label>
+            <input type="text" id="name" required placeholder="Ej: Mochila reciclada">
+
+            <label for="description">Descripción</label>
+            <textarea id="description" rows="4" required placeholder="Describe el artículo, su estado y otros detalles"></textarea>
+
+            <label for="category">Categoría</label>
+            <select id="category" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="ropa">Ropa y accesorios</option>
+                <option value="electronica">Electrónica</option>
+                <option value="muebles">Muebles y hogar</option>
+                <option value="otros">Otros</option>
+            </select>
+
+            <label for="price">Precio (USD)</label>
+            <input type="number" id="price" required step="0.01" placeholder="Ej: 25.00">
+
+            <label for="image">Imagen (URL)</label>
+            <input type="url" id="image" placeholder="http://...">
+
+            <button type="submit">Publicar producto</button>
+        </form>
+    </div>
+    <footer>
+        © 2025 Mercado Circular
+    </footer>
+</body>
+</html>

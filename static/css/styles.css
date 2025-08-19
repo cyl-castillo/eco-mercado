@@ -1,0 +1,204 @@
+/*
+   Estilos principales para Mercado Circular.
+   Se utiliza una paleta verde oscuro y tonos neutros para dar una
+   apariencia moderna y ecológica. Las reglas están organizadas por
+   componentes para facilitar su mantenimiento.
+*/
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7f4;
+  color: #2b2b2b;
+}
+
+header {
+  background-color: #005a32;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+nav a {
+  color: #ffffff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #d4f5e9;
+}
+
+.hero {
+  background-color: #e7f4ea;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  margin-top: 0;
+  font-size: 36px;
+  color: #004a2a;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 20px auto 30px auto;
+}
+
+.btn {
+  background-color: #007b43;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #006837;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.feature {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+}
+
+.feature h3 {
+  margin-top: 0;
+  color: #005a32;
+}
+
+footer {
+  background-color: #333;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 15px 10px;
+  margin-top: 40px;
+}
+
+/* Productos */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px 15px;
+}
+
+.product {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product h4 {
+  margin: 10px 0 5px;
+  color: #005a32;
+}
+
+.product p {
+  margin: 4px 0;
+}
+
+/* Formularios */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-container button {
+  background-color: #007b43;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.form-container button:hover {
+  background-color: #006837;
+}
+
+/* Lista de reparaciones */
+.repair-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.repair-item {
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  padding: 20px;
+}
+
+.repair-item h4 {
+  margin-top: 0;
+  color: #005a32;
+}

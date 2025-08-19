@@ -1,0 +1,165 @@
+/* Estilos básicos para el MVP de Mercado Circular */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+header {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #e8f5e9;
+}
+
+.hero h2 {
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 20px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin: 10px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.feature h3 {
+  margin-top: 0;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 20px;
+}
+
+/* Estilos específicos para el listado de productos */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.product {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 10px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+}
+
+.product img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product h4 {
+  margin: 10px 0 5px;
+}
+
+.product p {
+  margin: 5px 0;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-container input, .form-container textarea, .form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #45a049;
+}
+
+.repair-list {
+  padding: 20px;
+}
+
+.repair-item {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 10px 0;
+  padding: 15px;
+}
+.repair-item h4 {
+  margin-top: 0;
+}
