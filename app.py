@@ -12,8 +12,15 @@ http://localhost:5000 in your browser.
 
 import json
 import os
+import uuid
+import datetime
+import jwt
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from models import Base, engine, SessionLocal, User
+import graphene
 
 
 # Initialize the Flask application. The static folder is set to the
@@ -26,6 +33,11 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 # data from the API endpoints when running directly from the file
 # system or from another domain during development.
 CORS(app)
+
+# Database initialisation
+Base.metadata.create_all(bind=engine)
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret')
 
 # Path to the JSON file used to persist products. This file is
 # relative to the application's directory.
@@ -51,6 +63,103 @@ def save_products(products: list) -> None:
     """Save the list of products to the data file."""
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(products, f, ensure_ascii=False, indent=2)
+
+
+def create_jwt(user_id: int) -> str:
+    payload = {
+        'sub': user_id,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+
+class UserType(graphene.ObjectType):
+    id = graphene.Int()
+    email = graphene.String()
+    is_verified = graphene.Boolean()
+
+
+class Query(graphene.ObjectType):
+    users = graphene.List(UserType)
+
+    def resolve_users(self, info):
+        db = SessionLocal()
+        try:
+            return db.query(User).all()
+        finally:
+            db.close()
+
+
+schema = graphene.Schema(query=Query)
+
+
+@app.route('/api/register', methods=['POST'])
+def register_user() -> tuple:
+    data = request.get_json() or {}
+    email = data.get('email')
+    password = data.get('password')
+    if not email or not password:
+        return jsonify({'error': 'Email and password required'}), 400
+    db = SessionLocal()
+    try:
+        if db.query(User).filter_by(email=email).first():
+            return jsonify({'error': 'User exists'}), 400
+        token = uuid.uuid4().hex
+        user = User(email=email,
+                    password_hash=generate_password_hash(password),
+                    verification_token=token)
+        db.add(user)
+        db.commit()
+        return jsonify({'message': 'User created', 'verification_token': token}), 201
+    finally:
+        db.close()
+
+
+@app.route('/api/verify/<token>', methods=['GET'])
+def verify_email(token: str) -> tuple:
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter_by(verification_token=token).first()
+        if not user:
+            return jsonify({'error': 'Invalid token'}), 400
+        user.is_verified = True
+        user.verification_token = None
+        db.commit()
+        return jsonify({'message': 'Email verified'})
+    finally:
+        db.close()
+
+
+@app.route('/api/login', methods=['POST'])
+def login_user() -> tuple:
+    data = request.get_json() or {}
+    email = data.get('email')
+    password = data.get('password')
+    if not email or not password:
+        return jsonify({'error': 'Email and password required'}), 400
+    db = SessionLocal()
+    try:
+        user = db.query(User).filter_by(email=email).first()
+        if not user or not check_password_hash(user.password_hash, password):
+            return jsonify({'error': 'Invalid credentials'}), 401
+        if not user.is_verified:
+            return jsonify({'error': 'Email not verified'}), 403
+        token = create_jwt(user.id)
+        return jsonify({'token': token})
+    finally:
+        db.close()
+
+
+@app.route('/graphql', methods=['POST'])
+def graphql_endpoint() -> tuple:
+    data = request.get_json() or {}
+    result = schema.execute(data.get('query'))
+    response = {}
+    if result.errors:
+        response['errors'] = [str(e) for e in result.errors]
+    if result.data:
+        response['data'] = result.data
+    return jsonify(response)
 
 
 @app.route('/api/products', methods=['GET'])
